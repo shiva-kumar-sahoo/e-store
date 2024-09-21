@@ -38,10 +38,6 @@ const HomeStackScreen = () => {
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="ProductScreen" component={ProductScreen} />
       <HomeStack.Screen name="CartScreen" component={CartScreen} />
-      <HomeStack.Screen
-        name="OrderHistoryScreen"
-        component={OrderHistoryScreen}
-      />
       <HomeStack.Screen name="WishlistScreen" component={WishlistScreen} />
     </HomeStack.Navigator>
   );
