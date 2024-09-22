@@ -20,7 +20,11 @@ const CartScreen = () => {
   }, []);
   return (
     <GestureHandlerRootView>
-      <ScrollView className="flex-1 bg-[#115925]">
+      <ScrollView
+        className="flex-1 bg-[#115925]"
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+      >
         <View className="flex flex-row items-center  px-4 my-4">
           <View>
             <Ionicons
@@ -38,6 +42,7 @@ const CartScreen = () => {
           <View>
             <FlatList
               data={cartproduct}
+              scrollEnabled={false}
               keyExtractor={(item) => item.id}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
