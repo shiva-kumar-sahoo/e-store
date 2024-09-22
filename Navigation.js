@@ -15,6 +15,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 
+import AuthProvider, { AuthContext } from "./context/AuthContext";
+import { useContext } from "react";
+import { ActivityIndicator, View } from "react-native";
+
 const AuthStack = createNativeStackNavigator();
 const AuthStackScreen = () => {
   return (
@@ -91,15 +95,27 @@ const TabNavigationScreen = () => {
 };
 
 const AuthCheck = () => {
+  const { isLoading, userInfo } = useContext(AuthContext);
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size={60} color="#3fd969" />
+      </View>
+    );
+  }
   return (
     <NavigationContainer>
-      {true ? <TabNavigationScreen /> : <AuthStackScreen />}
+      {userInfo ? <TabNavigationScreen /> : <AuthStackScreen />}
     </NavigationContainer>
   );
 };
 
 function Navigation() {
-  return <AuthCheck />;
+  return (
+    <AuthProvider>
+      <AuthCheck />
+    </AuthProvider>
+  );
 }
 
 export default Navigation;

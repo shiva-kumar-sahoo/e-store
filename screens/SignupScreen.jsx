@@ -8,9 +8,21 @@ import {
 } from "react-native";
 import { Feather, FontAwesome5, AntDesign } from "@expo/vector-icons/";
 import { useNavigation } from "@react-navigation/native";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const SignupScreen = () => {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const { userLogin } = useContext(AuthContext);
   const navigation = useNavigation();
+  const handleSignUp = async () => {
+    if (email && password) {
+      await userLogin(email);
+    } else {
+      Alert.alert("All field is required.");
+    }
+  };
   return (
     <KeyboardAvoidingView className="flex-1 items-center justify-center bg-[#115925]">
       <View className="flex items-center justify-center my-6">
@@ -29,6 +41,7 @@ const SignupScreen = () => {
               placeholder="Email"
               keyboardType="email-address"
               className="ml-4 w-60 h-10 text-lg"
+              onChangeText={(value) => setEmail(value)}
             />
           </View>
           <View className="flex flex-row items-center space-x-2 bg-white rounded-full p-1">
@@ -39,13 +52,19 @@ const SignupScreen = () => {
               placeholder="Password"
               keyboardType="visible-password"
               className="ml-4 w-60 h-10 text-lg"
+              onChangeText={(value) => setPassword(value)}
             />
           </View>
         </View>
         <View className="flex items-center justify-center my-6 gap-y-5">
           <View className="flex flex-row items-center justify-evenly w-full my-2">
             <Pressable className="bg-[#093616] py-3 rounded-full w-32">
-              <Text className="text-base text-center text-white">Sign Up</Text>
+              <Text
+                className="text-base text-center text-white"
+                onPress={handleSignUp}
+              >
+                Sign Up
+              </Text>
             </Pressable>
           </View>
           <View className="flex flex-row items-center justify-center mt-4">

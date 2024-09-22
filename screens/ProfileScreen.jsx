@@ -10,9 +10,20 @@ import {
 import { Ionicons, Entypo } from "@expo/vector-icons/";
 import { useNavigation } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const ProfileScreen = () => {
+  const { userLogout } = useContext(AuthContext);
   const navigation = useNavigation();
+  const handleLogout = () => {
+    Alert.alert("Logout", "Are you sure you want to logout?", [
+      {
+        text: "Cancel",
+      },
+      { text: "OK", onPress: () => userLogout() },
+    ]);
+  };
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -152,9 +163,7 @@ const ProfileScreen = () => {
           <View>
             <Pressable
               className="flex flex-row items-center gap-x-2 bg-[#093616] p-2 rounded-full w-32"
-              onPress={() => {
-                Alert.alert("Logout");
-              }}
+              onPress={handleLogout}
             >
               <Entypo name="log-out" size={20} color="white" />
               <Text className="text-white text-lg font-semibold">Logout</Text>
