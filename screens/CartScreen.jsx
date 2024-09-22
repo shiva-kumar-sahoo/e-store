@@ -38,8 +38,8 @@ const CartScreen = () => {
             <Text className="text-3xl font-bold text-white">My Cart</Text>
           </View>
         </View>
-        <View className="bg-[#D0E8D7] rounded-t-[40px] w-full py-9 px-4 mt-10 ">
-          <View>
+        <View className="bg-[#D0E8D7] rounded-t-[40px] w-full py-9 px-4 mt-10 border-2">
+          <View className="flex items-center justify-center">
             <FlatList
               data={cartproduct}
               scrollEnabled={false}
@@ -47,15 +47,19 @@ const CartScreen = () => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View className="flex flex-row items-center space-x-4 p-4">
-                  <View className="w-16 h-16">
+                  <View className="w-20 px-1 h-20">
                     <Image
                       source={{ uri: item.image }}
-                      className="w-full h-full rounded-full"
+                      className="w-full h-full rounded-xl"
+                      resizeMode="center"
+                      resizeMethod="resize"
                     />
                   </View>
-                  <View className="flex justify-between gap-x-2">
-                    <Text className="text-lg font-semibold">{item.title}</Text>
-                    <Text className="text-lg font-normal text-[#6C53FD]">
+                  <View className="flex w-2/3 items-start justify-between gap-x-2">
+                    <Text className="text-lg font-semibold" numberOfLines={2}>
+                      {item.title}
+                    </Text>
+                    <Text className="text-lg font-normal text-[#6C53FD] mt-2">
                       ₹{item.price}
                     </Text>
                   </View>

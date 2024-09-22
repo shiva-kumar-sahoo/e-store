@@ -61,12 +61,12 @@ const ProductScreen = (params) => {
           </View>
         </View>
         <View className="mt-4">
-          <Text className="text-xl font-semibold text-black">
+          <Text className="text-xl font-semibold text-[#6C53FD]">
             ${product.price}
           </Text>
         </View>
         <View className="mt-4">
-          <Text className="text-lg font-semibold text-black">
+          <Text className="text-lg font-semibold text-gray-600">
             {product.description}
           </Text>
         </View>

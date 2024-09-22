@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [trendingProducts, setTrendingProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const dummyExploreCategoriesData = [
     {
@@ -52,18 +52,22 @@ const HomeScreen = () => {
       icon: "smile",
     },
   ];
-  const dummyTrendingProductsData = async () => {
+  const dummyProductsData = async () => {
     const response = await axios.get(
       "https://fakestoreapi.com/products?limit=10"
     );
-    setTrendingProducts(response.data);
+    setProducts(response.data);
   };
 
   useEffect(() => {
-    dummyTrendingProductsData();
+    dummyProductsData();
   }, []);
   return (
-    <ScrollView className="flex-1 bg-[#115925] pt-4">
+    <ScrollView
+      className="flex-1 bg-[#115925] pt-4"
+      nestedScrollEnabled={true}
+      showsVerticalScrollIndicator={false}
+    >
       <View className="flex flex-row items-center justify-between px-4 my-4">
         <View>
           <Text className="text-3xl font-bold text-white">Home</Text>
@@ -94,6 +98,7 @@ const HomeScreen = () => {
           data={dummyExploreCategoriesData}
           keyExtractor={(item) => item.id}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View className="flex items-center justify-center space-x-2 px-3">
               <View className="flex items-center justify-center rounded-full bg-[#D0E8D7] p-5">
@@ -112,9 +117,10 @@ const HomeScreen = () => {
             Featured Products
           </Text>
           <FlatList
-            data={trendingProducts}
+            data={products}
             keyExtractor={(item) => item.id.toString()}
             horizontal
+            showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
               <Pressable
                 className="space-x-2 my-1 p-2"
@@ -122,17 +128,22 @@ const HomeScreen = () => {
                   navigation.navigate("ProductScreen", { id: item.id });
                 }}
               >
-                <Image
-                  source={{ uri: item.image }}
-                  className="w-28 h-28 rounded-3l"
-                  resizeMode="contain"
-                />
-                <Text className="text-lg text-center text-black">
-                  Demo {item.id}
-                </Text>
-                <Text className="text-lg text-center text-[#6C53FD]">
-                  ₹{item.price}
-                </Text>
+                <View className="w-28 h-28 p-2">
+                  <Image
+                    source={{ uri: item.image }}
+                    className="w-full h-full rounded-3xl"
+                    resizeMode="contain"
+                    resizeMethod="resize"
+                  />
+                </View>
+                <View className="flex items-start justify-between gap-x-2">
+                  <Text className="text-lg text-center text-black">
+                    Demo {item.id}
+                  </Text>
+                  <Text className="text-lg text-center text-[#6C53FD]">
+                    ₹{item.price}
+                  </Text>
+                </View>
               </Pressable>
             )}
           />
@@ -143,7 +154,7 @@ const HomeScreen = () => {
             Trending Products
           </Text>
           <FlatList
-            data={trendingProducts}
+            data={products}
             keyExtractor={(item) => item.id.toString()}
             horizontal
             renderItem={({ item }) => (
@@ -153,17 +164,22 @@ const HomeScreen = () => {
                   navigation.navigate("ProductScreen", { id: item.id });
                 }}
               >
-                <Image
-                  source={{ uri: item.image }}
-                  className="w-28 h-28 rounded-2xl"
-                  resizeMode="contain"
-                />
-                <Text className="text-lg text-center text-black">
-                  Demo {item.id}
-                </Text>
-                <Text className="text-lg text-center text-[#6C53FD]">
-                  ₹{item.price}
-                </Text>
+                <View className="w-28 h-28 p-2">
+                  <Image
+                    source={{ uri: item.image }}
+                    className="w-full h-full rounded-3xl"
+                    resizeMode="contain"
+                    resizeMethod="resize"
+                  />
+                </View>
+                <View className="flex items-start justify-between gap-x-2">
+                  <Text className="text-lg text-center text-black">
+                    Demo {item.id}
+                  </Text>
+                  <Text className="text-lg text-center text-[#6C53FD]">
+                    ₹{item.price}
+                  </Text>
+                </View>
               </Pressable>
             )}
           />
