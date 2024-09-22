@@ -8,22 +8,49 @@ import {
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons/";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 
 const OrderHistoryScreen = () => {
-  const [orderedProduct, setOrderedProduct] = useState([]);
   const navigation = useNavigation();
-  const fetchOrderedProduct = async () => {
-    const response = await axios.get(
-      "https://fakestoreapi.com/products/?limit=5"
-    );
-    setOrderedProduct(response.data);
-  };
-  useEffect(() => {
-    fetchOrderedProduct();
-  }, []);
+  const orderedProduct = [
+    {
+      id: 1,
+      title: "Nike Sneakers",
+      price: 5000,
+      image: require("../assets/products/product4.png"),
+    },
+    {
+      id: 2,
+      title: "Macbook Pro",
+      price: 61990,
+      image: require("../assets/products/product2.png"),
+    },
+    {
+      id: 3,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product6.png"),
+    },
+    {
+      id: 4,
+      title: "Zebra Adidas",
+      price: 3563,
+      image: require("../assets/products/product1.png"),
+    },
+    {
+      id: 5,
+      title: "Hp Victus",
+      price: 25000,
+      image: require("../assets/products/product5.png"),
+    },
+    {
+      id: 6,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product3.png"),
+    },
+  ];
+
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -63,10 +90,9 @@ const OrderHistoryScreen = () => {
                 <View className="flex flex-row items-center space-x-4 p-4">
                   <View className="w-20 px-1 h-20">
                     <Image
-                      source={{ uri: item.image }}
+                      source={item.image}
                       className="w-full h-full rounded-xl"
                       resizeMode="center"
-                      resizeMethod="resize"
                     />
                   </View>
                   <View className="flex w-2/3 items-start justify-between gap-x-2">

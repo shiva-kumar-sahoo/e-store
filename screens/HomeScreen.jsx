@@ -7,13 +7,10 @@ import {
   Pressable,
 } from "react-native";
 import { AntDesign, Feather, FontAwesome6 } from "@expo/vector-icons/";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [products, setProducts] = useState([]);
 
   const dummyExploreCategoriesData = [
     {
@@ -52,16 +49,84 @@ const HomeScreen = () => {
       icon: "smile",
     },
   ];
-  const dummyProductsData = async () => {
-    const response = await axios.get(
-      "https://fakestoreapi.com/products?limit=10"
-    );
-    setProducts(response.data);
-  };
 
-  useEffect(() => {
-    dummyProductsData();
-  }, []);
+  const FeaturedProducts = [
+    {
+      id: 1,
+      title: "Zebra Adidas",
+      price: 3563,
+      image: require("../assets/products/product1.png"),
+    },
+    {
+      id: 2,
+      title: "Macbook Pro",
+      price: 61990,
+      image: require("../assets/products/product2.png"),
+    },
+    {
+      id: 3,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product3.png"),
+    },
+    {
+      id: 4,
+      title: "Nike Sneakers",
+      price: 5000,
+      image: require("../assets/products/product4.png"),
+    },
+    {
+      id: 5,
+      title: "Hp Victus",
+      price: 25000,
+      image: require("../assets/products/product5.png"),
+    },
+    {
+      id: 6,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product6.png"),
+    },
+  ];
+  const TrendingProducts = [
+    {
+      id: 1,
+      title: "Nike Sneakers",
+      price: 5000,
+      image: require("../assets/products/product4.png"),
+    },
+    {
+      id: 2,
+      title: "Macbook Pro",
+      price: 61990,
+      image: require("../assets/products/product2.png"),
+    },
+    {
+      id: 3,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product6.png"),
+    },
+    {
+      id: 4,
+      title: "Zebra Adidas",
+      price: 3563,
+      image: require("../assets/products/product1.png"),
+    },
+    {
+      id: 5,
+      title: "Hp Victus",
+      price: 25000,
+      image: require("../assets/products/product5.png"),
+    },
+    {
+      id: 6,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product3.png"),
+    },
+  ];
+
   return (
     <ScrollView
       className="flex-1 bg-[#115925] pt-4"
@@ -117,7 +182,7 @@ const HomeScreen = () => {
             Featured Products
           </Text>
           <FlatList
-            data={products}
+            data={FeaturedProducts}
             keyExtractor={(item) => item.id.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -128,17 +193,17 @@ const HomeScreen = () => {
                   navigation.navigate("ProductScreen", { id: item.id });
                 }}
               >
-                <View className="w-28 h-28 p-2">
+                <View className="w-full p-2">
                   <Image
-                    source={{ uri: item.image }}
-                    className="w-full h-full rounded-3xl"
+                    source={item.image}
+                    className="w-36 h-36 rounded-3xl"
                     resizeMode="contain"
                     resizeMethod="resize"
                   />
                 </View>
                 <View className="flex items-start justify-between gap-x-2">
                   <Text className="text-lg text-center text-black">
-                    Demo {item.id}
+                    {item.title}
                   </Text>
                   <Text className="text-lg text-center text-[#6C53FD]">
                     ₹{item.price}
@@ -154,7 +219,7 @@ const HomeScreen = () => {
             Trending Products
           </Text>
           <FlatList
-            data={products}
+            data={TrendingProducts}
             keyExtractor={(item) => item.id.toString()}
             horizontal
             renderItem={({ item }) => (
@@ -164,10 +229,10 @@ const HomeScreen = () => {
                   navigation.navigate("ProductScreen", { id: item.id });
                 }}
               >
-                <View className="w-28 h-28 p-2">
+                <View className="w-full p-2">
                   <Image
-                    source={{ uri: item.image }}
-                    className="w-full h-full rounded-3xl"
+                    source={item.image}
+                    className="w-36 h-36 rounded-3xl"
                     resizeMode="contain"
                     resizeMethod="resize"
                   />

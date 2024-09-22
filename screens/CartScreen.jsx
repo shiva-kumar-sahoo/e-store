@@ -7,17 +7,46 @@ import axios from "axios";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const CartScreen = () => {
-  const [cartproduct, setCartProduct] = useState([]);
   const navigation = useNavigation();
-  const fetchCartProduct = async () => {
-    const response = await axios.get(
-      "https://fakestoreapi.com/products/?limit=5"
-    );
-    setCartProduct(response.data);
-  };
-  useEffect(() => {
-    fetchCartProduct();
-  }, []);
+  const cartproduct = [
+    {
+      id: 1,
+      title: "Nike Sneakers",
+      price: 5000,
+      image: require("../assets/products/product4.png"),
+    },
+    {
+      id: 2,
+      title: "Macbook Pro",
+      price: 61990,
+      image: require("../assets/products/product2.png"),
+    },
+    {
+      id: 3,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product6.png"),
+    },
+    {
+      id: 4,
+      title: "Zebra Adidas",
+      price: 3563,
+      image: require("../assets/products/product1.png"),
+    },
+    {
+      id: 5,
+      title: "Hp Victus",
+      price: 25000,
+      image: require("../assets/products/product5.png"),
+    },
+    {
+      id: 6,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product3.png"),
+    },
+  ];
+
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -49,10 +78,9 @@ const CartScreen = () => {
                 <View className="flex flex-row items-center space-x-4 p-4">
                   <View className="w-20 px-1 h-20">
                     <Image
-                      source={{ uri: item.image }}
+                      source={item.image}
                       className="w-full h-full rounded-xl"
-                      resizeMode="center"
-                      resizeMethod="resize"
+                      resizeMode="contain"
                     />
                   </View>
                   <View className="flex w-2/3 items-start justify-between gap-x-2">

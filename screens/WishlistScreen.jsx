@@ -2,21 +2,48 @@ import { View, Text, ScrollView, FlatList, Image, Alert } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons/";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const WishlistScreen = () => {
-  const [wishlistproduct, setWishlistProduct] = useState([]);
   const navigation = useNavigation();
-  const fetchWishlistProduct = async () => {
-    const response = await axios.get(
-      "https://fakestoreapi.com/products/?limit=10"
-    );
-    setWishlistProduct(response.data);
-  };
-  useEffect(() => {
-    fetchWishlistProduct();
-  }, []);
+  const wishlistproduct = [
+    {
+      id: 1,
+      title: "Nike Sneakers",
+      price: 5000,
+      image: require("../assets/products/product4.png"),
+    },
+    {
+      id: 2,
+      title: "Macbook Pro",
+      price: 61990,
+      image: require("../assets/products/product2.png"),
+    },
+    {
+      id: 3,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product6.png"),
+    },
+    {
+      id: 4,
+      title: "Zebra Adidas",
+      price: 3563,
+      image: require("../assets/products/product1.png"),
+    },
+    {
+      id: 5,
+      title: "Hp Victus",
+      price: 25000,
+      image: require("../assets/products/product5.png"),
+    },
+    {
+      id: 6,
+      title: "Comfy Chair",
+      price: 2000,
+      image: require("../assets/products/product3.png"),
+    },
+  ];
+
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -43,16 +70,15 @@ const WishlistScreen = () => {
               data={wishlistproduct}
               scrollEnabled={false}
               numColumns={2}
-              columnWrapperStyle={{ justifyContent: "space-between", gap: 15 }}
+              columnWrapperStyle={{ justifyContent: "space-between", gap: 10 }}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
-                <View className="flex items-center justify-center w-40 h-72 bg-green-300 py-6 my-2 rounded-xl">
+                <View className="flex items-center justify-center w-40 h-72  py-6 my-2 rounded-xl">
                   <View className="w-full px-1  mt-4">
                     <Image
-                      source={{ uri: item.image }}
-                      className="w-36 h-36 rounded-xl "
-                      resizeMode="center"
-                      resizeMethod="resize"
+                      source={item.image}
+                      className="w-full h-full rounded-xl"
+                      resizeMode="contain"
                     />
                   </View>
                   <View className="w-full px-1 mt-2">

@@ -8,44 +8,42 @@ const ExploreScreen = () => {
     {
       id: 1,
       title: "Fashion",
-      image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+      image: require("../assets/categories/category1.png"),
     },
     {
       id: 2,
       title: "Mobile",
-      image:
-        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+      image: require("../assets/categories/category2.png"),
     },
     {
       id: 3,
       title: "Sports",
-      image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+      image: require("../assets/categories/category3.png"),
     },
     {
       id: 4,
       title: "Electronics",
-      image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+      image: require("../assets/categories/category4.png"),
     },
     {
       id: 5,
-      title: "Beauty",
-      image: "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
+      title: "Men's Cloth",
+      image: require("../assets/categories/category5.png"),
     },
     {
       id: 6,
-      title: "Education",
-      image:
-        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+      title: "Women's Cloth",
+      image: require("../assets/categories/category6.png"),
     },
     {
       id: 7,
-      title: "Children's Toy",
-      image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+      title: "Beauty",
+      image: require("../assets/categories/category7.png"),
     },
     {
       id: 8,
-      title: "Shoes",
-      image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+      title: "Books & Education",
+      image: require("../assets/categories/category8.png"),
     },
   ];
   return (
@@ -74,21 +72,20 @@ const ExploreScreen = () => {
               data={demoExploreData}
               scrollEnabled={false}
               numColumns={2}
-              columnWrapperStyle={{ justifyContent: "space-between", gap: 15 }}
+              columnWrapperStyle={{ justifyContent: "space-between", gap: 10 }}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <View className="flex items-center justify-center w-40 h-56 py-6 my-2 rounded-xl">
                   <View className="w-full px-1 mt-4">
                     <Image
-                      source={{ uri: item.image }}
-                      className="w-36 h-36 rounded-3xl"
-                      resizeMode="center"
-                      resizeMethod="resize"
+                      source={item.image}
+                      className="w-full h-full rounded-xl"
+                      resizeMode="contain"
                     />
                   </View>
-                  <View className="flex flex-row items-center justify-center mt-2 w-full px-4">
-                    <Text className="text-xl font-normal text-black">
+                  <View className="flex flex-row items-start mt-2 w-full">
+                    <Text className="text-lg font-normal text-black">
                       {item.title}
                     </Text>
                   </View>

@@ -9,9 +9,7 @@ const ProductScreen = (params) => {
   const productId = parseInt(params.route.params.id);
   const navigation = useNavigation();
   const fetchProduct = async () => {
-    const response = await axios.get(
-      `https://fakestoreapi.com/products/${productId}`
-    );
+    const response = await axios.get(`https://fakestoreapi.com/products/2`);
     setProduct(response.data);
   };
   useEffect(() => {
